@@ -8,6 +8,11 @@ let cardMovesCount = 0; // Keep track of moves
 let clockStatus = true; // Boolean that holds the status 
 let intervalId; // Delay for the counter
 let time = 0; // 
+let matchedCards = document.getElementsByClassName('match');
+let modal = document.getElementById('modal-background');
+cardList = document.getElementsByClassName('card');
+cardListing = [...cardList];
+let closeIcon = document.querySelector('.close');
 
 
 
@@ -186,9 +191,47 @@ function timeDisplay() {
 }
 // startClock();
 
-function stopClock() {
-    clearInterval(intervalId);
+// function stopClock() {
+
+// }
+
+
+function congratulations() {
+    if (matchedCards.length === 16) {
+        clearInterval(intervalId);
+        finalTime = timer.innerHTML;
+        modal.classList.add('show');
+
+        var starRating = document.querySelector('.stars').innerHTML;
+
+        document.getElementById('finalMove').innerHTML = cardMovesCount;
+        document.getElementById('starRating').innerHTML = starRating;
+        document.getElementById('totalTime').innerHTML = finalTime;
+
+        closeModal();
+    };
 }
+
+function closeModal() {
+    closeIcon.addEventListener('click', function(event) {
+        modal.classList.remove('show');
+        shuffleCard();
+    });
+}
+
+function newGame() {
+    modal.classList.remove('show');
+    shuffleCard();
+}
+
+
+for (i = 0; i < cardListing.length; i++) {
+    cardList = cardListing[i];
+    // cardList.addEventListener('click', cardMoves);
+    // cardList.addEventListener('click', clickedOverSelect);
+    cardList.addEventListener('click', congratulations);
+}
+
 
 /*
 const cardz = document.querySelectorAll('.card');

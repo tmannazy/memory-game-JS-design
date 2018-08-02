@@ -26,9 +26,10 @@
             </ul>
 
             <span class="moves">0</span> Moves
-
-            <div class="restart">
-                <i class="fa fa-repeat"></i>
+            <div class="timer">
+                <div class="restart" onclick="shuffleCard()">
+                    <i class="fa fa-repeat"></i>
+                </div>
             </div>
         </section>
         <ul class="deck">
@@ -81,13 +82,21 @@
                 <i class="fa fa-cube"></i>
             </li>
         </ul>
-        <div class="modal-background">
+        <div id="modal-background">
             <div class="popup">
                 <h2>Congratulations</h2>
                 <a class="close" href="#">x</a>
                 <div class="popup-content">
                     Great! You are a genius.
                 </div>
+                <div class="popup-content-2">
+                    <p>Your made<span id="finalMove"></span> moves</p>
+                    <p>in<span id="totalTime"></span> </p>
+                    <p>Rating: <span id="starRating"></span></p>
+                </div>
+                <button id="new-game" onclick="newGame()">
+                    New Game
+                </button>
             </div>
         </div>
     </div>

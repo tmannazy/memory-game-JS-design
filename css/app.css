@@ -129,3 +129,30 @@ h1 {
     background: #ffffff54;
     transform: translate(-50%, -40%);
 }
+
+.popup h2 {
+    margin-top: 0;
+    color: #333333;
+    font-family: 'Courier New', Courier, monospace;
+}
+
+.popup .close {
+    position: absolute;
+    top: 20px;
+    right: 30px;
+    transition: all 200ms;
+    font-size: 30px;
+    font-weight: bolder;
+    text-decoration: none;
+    color: #333333;
+}
+
+.popup .close:hover {
+    color: gray;
+}
+
+.popup .popup-content .popup-content-2 {
+    max-height: 30%;
+    overflow: auto;
+    text-align: center;
+}
