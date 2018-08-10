@@ -5,7 +5,7 @@
 const cardz = document.querySelector('.deck'); // Select the unordered list and put it in a variable
 let clickedOver = []; // Create a variable that puts the entire list of unordered list elements in an array
 let cardMovesCount = 0; // Keep track of moves
-let clockStatus = true; // Boolean that holds the status 
+let clockStatus = true; // Boolean that holds the status of the clock
 let intervalId; // Delay for the counter
 let time = 0; // 
 let matchedCards = document.getElementsByClassName('match');
@@ -57,19 +57,6 @@ function shuffle(array) {
 
 
 
-// Shuffles the card and replaces their position
-function shuffleCard() {
-    const reshuffle = Array.from(document.querySelectorAll('.deck li'));
-    // console.log('Cards to shuffle', reshuffle);
-    const reshuffledCards = shuffle(reshuffle);
-    // console.log('Cards reshuffled', reshuffledCards);
-    for (anyCard of reshuffledCards) {
-        cardz.appendChild(anyCard);
-    }
-}
-shuffleCard();
-
-
 // Add an event listener to the variable created and target it
 cardz.addEventListener('click', function(event) {
     const clickOver = event.target;
@@ -84,6 +71,13 @@ cardz.addEventListener('click', function(event) {
         }
     }
 
+    if (clickedOver.length === 2) {
+        cardMatch(clickOver);
+        movesCount();
+        scoreCard();
+        congratulations();
+    }
+
     function cardBehavior(clickOver) {
         return (
             clickOver.classList.contains('card') &&
@@ -91,14 +85,6 @@ cardz.addEventListener('click', function(event) {
             clickedOver.length < 2 &&
             !clickedOver.includes(clickOver)
         );
-    }
-
-    if (clickedOver.length === 2) {
-        cardMatch(clickOver);
-        movesCount();
-        scoreCard();
-        startClock();
-        stopClock();
     }
 });
 
@@ -115,7 +101,7 @@ function addClickedOver(clickOver) {
 }
 
 // This function checks for card match and unmatch
-function cardMatch(clickOver) {
+function cardMatch() {
     if (clickedOver[0].firstElementChild.className ===
         clickedOver[1].firstElementChild.className) {
         clickedOver[0].classList.toggle('match');
@@ -139,13 +125,24 @@ function clickedOverSelect(card) {
     card.classList.toggle('show');
 }
 
+
+// Shuffles the card and replaces their position
+function shuffleCard() {
+    const reshuffle = Array.from(document.querySelectorAll('.deck li'));
+    const reshuffledCards = shuffle(reshuffle);
+    for (anyCard of reshuffledCards) {
+        cardz.appendChild(anyCard);
+    }
+}
+shuffleCard();
+
 function movesCount() { // Increment the moves after 2 cards are selected
     cardMovesCount++;
     const movesWording = document.querySelector('.moves');
     movesWording.innerHTML = cardMovesCount;
 }
 
-function scoreCard() { // 
+function scoreCard() {
     if (cardMovesCount === 12 || cardMovesCount === 30) {
         starHide();
     }
@@ -182,7 +179,6 @@ function timeDisplay() {
     const minutes = Math.floor(time / 60);
     const seconds = time % 60;
     clock.innerHTML = time;
-
     if (seconds < 10) {
         clock.innerHTML = `${minutes}:0${seconds}`;
     } else {
@@ -191,9 +187,9 @@ function timeDisplay() {
 }
 // startClock();
 
-// function stopClock() {
-
-// }
+function stopClock() {
+    clearInterval(intervalId);
+}
 
 
 function congratulations() {
@@ -231,30 +227,3 @@ for (i = 0; i < cardListing.length; i++) {
     // cardList.addEventListener('click', clickedOverSelect);
     cardList.addEventListener('click', congratulations);
 }
-
-
-/*
-const cardz = document.querySelectorAll('.card');
-// console.log(cardz);
-
-for (let cards of cardz) {
-    cards.addEventListener('click', function() {
-        console.log(' Card List!');
-
-    })
-}
-*/
-
-/*
-function cardFunction() {
-    const card = getElementsByClassName('card');
-    if (card.classList.contains('card')) {
-        card.classList.toggle('open');
-        card.classList.toggle('show');
-        console.log('A card was clicked!');
-    }
-}
-const cardEvent = document.querySelector('.deck');
-// const viewOnly = cardEvent.addEventListener('click', cardFunction(), => );
-cardFunction();
- */

@@ -111,13 +111,14 @@ h1 {
     cursor: pointer;
 }
 
-.modal-background {
+#modal-background {
     position: absolute;
     width: 100%;
     height: 100%;
     top: 0;
     left: 0;
-    background: rgba(0, 0, 0, 0.421)
+    background: rgba(0, 0, 0, 0.421);
+    display: none;
 }
 
 .popup {
